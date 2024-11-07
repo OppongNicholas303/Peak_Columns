@@ -2,76 +2,90 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        int [][] matrix1 = {{1, 8, 3, 4, 0},{6, 7, 2, 7,0}};
 
+        // Receive user input for matrix dimensions
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Enter number of rows: ");
+        if(!sc.hasNextInt()) System.out.println("Invalid integer restart the Application!");
         int row = sc.nextInt();
 
         System.out.println("Enter number of columns: ");
+        if(!sc.hasNextInt()) System.out.println("Invalid integer restart the Application!");
         int column = sc.nextInt();
 
+        //Set matrix dimension with user defined input
         int [][] matrix = new int[row][column];
 
-        for(int i=0; i<matrix.length; i++){
-            for (int j=0; j<matrix[0].length; j++){
-                System.out.print("Enter element [" + i + "][" +  j + "]: ");
-                matrix[i][j] = sc.nextInt();
+        // Insert rows and columns into the matrix
+        inputFunction(matrix);
 
-            }
-        }
-
+        // Check if no element meet the peak column rule
         boolean isElementFind = false;
 
-        /*
-            find the lent of the array and use it to loop through
-         */
+        // Loop through the array with the array length
         for(int i=0; i<matrix.length; i++){
             // Find the maximum number of each row
-            int maxRow = matrix[i][0];
-            for(int k=0; k<matrix[i].length; k++){
-                if(maxRow < matrix[i][k]){
-                    maxRow = matrix[i][k];
-//                    indexRow = k;
-                }
-            }
 
+           int maxRow =  maxNumberInRow(matrix, i);
             /* After finding the max loop through each row to find
                 the element equal to max value
              */
+
             for(int k=0; k<matrix[i].length; k++){
-                int indexRow = 0;
+                int rowIndex = 0;
 
-                // Check if max is equal to the element
-                // then you loop through it colum to see if it is minimum
-                // at it column
-
+                /* Check if max is equal to the element
+                   then you loop through it colum to see if it is minimum
+                   at it column
+                */
                 if(maxRow == matrix[i][k]){
-                    indexRow = k;
+                    rowIndex = k;
 
-                    boolean isMinCol = true;
+                    boolean isMinColumn = true;
 
                     for(int j=0; j<matrix.length; j++){
-                        int minCol = matrix[i][indexRow];
+                        int minColumn = matrix[i][rowIndex];
 
-                        if(minCol > matrix[j][indexRow]){
-                            isMinCol=false;
+                        if(minColumn > matrix[j][rowIndex]){
+                            isMinColumn=false;
                             break;
                         }
-
                     }
 
-                    if (isMinCol){
+                    if (isMinColumn){
                         isElementFind = true;
-                        System.out.println("("+i+"," + indexRow + ")" + " = " + matrix[i][indexRow]);
+                        System.out.println("("+(i+1)+"," + (rowIndex+1) + ")" + " = " + matrix[i][rowIndex]);
                     }
-
                 }
             }
         }
 
        if(!isElementFind) System.out.println("no element found");
 
+    }
+
+    public static void inputFunction(int [][] matrix){
+        Scanner sc = new Scanner(System.in);
+        for(int i=0; i<matrix.length; i++){
+            for (int j=0; j<matrix[0].length; j++){
+                System.out.print("Enter element [" + i + "][" +  j + "]: ");
+                if(!sc.hasNextInt()) System.out.println("Invalid integer restart the Application!");
+                matrix[i][j] = sc.nextInt();
+            }
+        }
+
+    }
+
+    public static int maxNumberInRow(int [][] row, int index){
+        int maxRow = row[index][0];
+
+        for(int t=0; t<row[index].length; t++){
+            if(maxRow < row[index][t]){
+                maxRow = row[index][t];
+            }
+        }
+
+        return maxRow;
     }
 }

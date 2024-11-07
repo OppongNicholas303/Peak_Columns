@@ -6,7 +6,6 @@ public class Main {
 
         Scanner sc = new Scanner(System.in);
 
-
         System.out.println("Enter number of rows: ");
         int row = sc.nextInt();
 
@@ -23,13 +22,12 @@ public class Main {
             }
         }
 
-
+        boolean isElementFind = false;
 
         /*
             find the lent of the array and use it to loop through
          */
         for(int i=0; i<matrix.length; i++){
-
             // Find the maximum number of each row
             int maxRow = matrix[i][0];
             for(int k=0; k<matrix[i].length; k++){
@@ -53,6 +51,7 @@ public class Main {
                     indexRow = k;
 
                     boolean isMinCol = true;
+
                     for(int j=0; j<matrix.length; j++){
                         int minCol = matrix[i][indexRow];
 
@@ -64,6 +63,7 @@ public class Main {
                     }
 
                     if (isMinCol){
+                        isElementFind = true;
                         System.out.println("("+i+"," + indexRow + ")" + " = " + matrix[i][indexRow]);
                     }
 
@@ -71,8 +71,7 @@ public class Main {
             }
         }
 
-
-
+       if(!isElementFind) System.out.println("no element found");
 
     }
 }

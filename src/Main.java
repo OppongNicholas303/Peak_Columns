@@ -39,6 +39,7 @@ public class Main {
                    then you loop through it colum to see if it is minimum
                    at it column
                 */
+
                 if(maxRow == matrix[i][k]){
                     rowIndex = k;
 
@@ -55,7 +56,7 @@ public class Main {
 
                     if (isMinColumn){
                         isElementFind = true;
-                        System.out.println("("+(i+1)+"," + (rowIndex+1) + ")" + " = " + matrix[i][rowIndex]);
+                        System.out.println("("+i+"," + rowIndex + ")" + " = " + matrix[i][rowIndex]);
                     }
                 }
             }
@@ -67,7 +68,10 @@ public class Main {
 
     public static void inputFunction(int [][] matrix){
         Scanner sc = new Scanner(System.in);
+
         for(int i=0; i<matrix.length; i++){
+            // matrix [1][0] =
+
             for (int j=0; j<matrix[0].length; j++){
                 System.out.print("Enter element [" + i + "][" +  j + "]: ");
                 if(!sc.hasNextInt()) System.out.println("Invalid integer restart the Application!");
